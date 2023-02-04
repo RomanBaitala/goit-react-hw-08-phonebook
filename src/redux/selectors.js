@@ -1,18 +1,7 @@
-import { createSelector } from '@reduxjs/toolkit';
+export const selectToken = store => store.auth.token;
 
-export const selectContacts = state => state.contacts;
+export const selectUser = store => store.auth.user;
 
-export const selectIsLoading = state => state.contacts.isLoading;
+export const selectContacts = store => store.phonebook.contacts;
 
-export const selectError = state => state.contacts.error;
-
-export const selectFilter = filter => filter.filter;
-
-export const visibleContacts = createSelector(
-  [selectContacts, selectFilter],
-  (contacts, filter) => {
-    return contacts.contacts.filter(contact =>
-      contact?.name?.toLowerCase()?.includes(filter)
-    );
-  }
-);
+export const selectFilter = store => store.phonebook.filter;
