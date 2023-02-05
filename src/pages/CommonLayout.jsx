@@ -1,4 +1,4 @@
-const { SharedLayout } = require('components/SharedLayout/SharedLayout');
+import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 
 export const CommonLayout = () => {
   return <SharedLayout />;

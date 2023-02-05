@@ -1,7 +1,12 @@
 import { CONST } from 'redux/constants';
-import { loginUser, logoutUser, refreshUser, registerUser } from 'redux/operations';
+import {
+  loginUser,
+  logoutUser,
+  refreshUser,
+  registerUser,
+} from 'redux/operations';
 
-const { createSlice } = require('@reduxjs/toolkit');
+import { createSlice } from '@reduxjs/toolkit';
 
 const authSlice = createSlice({
   name: 'auth',

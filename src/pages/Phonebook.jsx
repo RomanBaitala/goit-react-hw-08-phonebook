@@ -27,7 +27,11 @@ export const Phonebook = () => {
       setFilteredContacts(
         [
           ...contacts
-            .filter(contact => contact.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+            .filter(contact =>
+              contact.name
+                .toLocaleLowerCase()
+                .includes(search.toLocaleLowerCase())
+            )
             .sort((a, b) => a.name.localeCompare(b.name)),
         ].sort()
       );
@@ -49,7 +53,11 @@ export const Phonebook = () => {
     const form = e.currentTarget;
     const { name, number } = form.elements;
 
-    const isNameInContacts = contacts.some(contact => contact.name.toLocaleLowerCase() === name.value.trim().toLocaleLowerCase());
+    const isNameInContacts = contacts.some(
+      contact =>
+        contact.name.toLocaleLowerCase() ===
+        name.value.trim().toLocaleLowerCase()
+    );
 
     if (isNameInContacts) {
       setTimeout(() => {
@@ -71,7 +79,10 @@ export const Phonebook = () => {
     <>
       <Toolbar>
         <Filter />
-        <IconButton style={{ color: '#bbffbb' }} onClick={e => setIsModalOpen(true)}>
+        <IconButton
+          style={{ color: '#bbffbb' }}
+          onClick={e => setIsModalOpen(true)}
+        >
           {CONST.icon.add}
         </IconButton>
       </Toolbar>
@@ -84,8 +95,15 @@ export const Phonebook = () => {
         <StyledHeading>Your phonebook is empty</StyledHeading>
       )}
 
-      <Modal isModalOpen={isModalOpen} handleClose={handleModalClose} title="Add new contact">
-        <AddContactForm isLoading={isAdding} handleSubmit={handleAddContactSubmit} />
+      <Modal
+        isModalOpen={isModalOpen}
+        handleClose={handleModalClose}
+        title="Add new contact"
+      >
+        <AddContactForm
+          isLoading={isAdding}
+          handleSubmit={handleAddContactSubmit}
+        />
       </Modal>
     </>
   );
