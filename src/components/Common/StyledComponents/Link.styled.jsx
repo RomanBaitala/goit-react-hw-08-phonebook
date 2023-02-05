@@ -3,20 +3,21 @@ import { NavLink } from 'react-router-dom';
 
 export const StyledLink = styled(NavLink)`
   position: relative;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: 500;
+  padding: ${p => p.theme.mp(1, 3)};
+  font-size: ${p => p.theme.fontSizes.xl};
+  font-weight: ${p => p.theme.fontWeights.bold};
   text-decoration: none;
-  color: black;
+  color: ${p => p.theme.colors.defaultText};
 `;
 
 export const StyledNavLink = styled(NavLink)`
   position: relative;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: 500;
+  padding: ${p => p.theme.mp(1, 3)};
+  font-size: ${p => p.theme.fontSizes.xl};
+  font-weight: ${p => p.theme.fontWeights.bold};
   text-decoration: none;
-  color: black;
+  color: ${p => p.theme.colors.defaultText};
+
   &.active::after {
     content: '';
     position: absolute;
@@ -24,6 +25,6 @@ export const StyledNavLink = styled(NavLink)`
     width: 80%;
     left: 10%;
     bottom: -10px;
-    background-color: blue;
+    background-color: ${p => p.theme.colors.accentText};
   }
 `;

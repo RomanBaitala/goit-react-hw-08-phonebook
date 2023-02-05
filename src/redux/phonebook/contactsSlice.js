@@ -1,27 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { addContact, deleteContact, fetchContacts } from '../operations';
+// import { fetchContacts, addContact, deleteContact } from 'redux/operations';
+import { fetchContacts, addContact, deleteContact } from 'redux/operations';
+
+const { createSlice } = require('@reduxjs/toolkit');
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: [],
-  extraReducers: builder => {
-    builder
-      .addCase(fetchContacts.pending, state => state)
-      .addCase(fetchContacts.fulfilled, (_, action) => {
-        action.payload;
-      })
-      .addCase(fetchContacts.rejected, state => state)
 
-      .addCase(addContact.pending, state => state)
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.push(action.payload);
-      })
-      .addCase(addContact.rejected, state => state)
+  extraReducers: {
+    [addContact.pending]: state => state,
+    [addContact.rejected]: state => state,
+    [addContact.fulfilled]: (state, action) => {
+      state.push(action.payload);
+    },
 
-      .addCase(deleteContact.pending, state => state)
-      .addCase(deleteContact.fulfilled, state => state)
-      .addCase(deleteContact.rejected, state => state);
+    [deleteContact.pending]: state => state,
+    [deleteContact.rejected]: state => state,
+    [deleteContact.fulfilled]: state => state,
+
+    [fetchContacts.pending]: state => state,
+    [fetchContacts.rejected]: state => state,
+    [fetchContacts.fulfilled]: (_, action) => action.payload,
   },
 });
 
-export const contactReducer = contactsSlice.reducer;
+export const contactsReducer = contactsSlice.reducer;

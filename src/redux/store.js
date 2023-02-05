@@ -1,50 +1,43 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { contactReducer } from './phonebook/contactsSlice';
-import { filterReducer } from './phonebook/filterSlice';
-import { authReducer } from './auth/slice';
 
-const middleware = [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-];
-x;
+import { authReducer } from './auth/authSlice';
+import { contactsReducer } from './phonebook/contactsSlice';
+import { filterReducer } from './phonebook/filterSlice';
 
 const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['token'],
 };
-
-const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const presistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 const phonebookReducer = combineReducers({
-  contacts: contactReducer,
+  contacts: contactsReducer,
   filter: filterReducer,
 });
 
 const rootReducer = combineReducers({
   phonebook: phonebookReducer,
-  auth: persistedAuthReducer,
+  auth: presistedAuthReducer,
 });
 
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware,
-  devTools: process.env.NODE_ENV === 'development',
-});
+export const store = configureStore(
+  {
+    reducer: rootReducer,
+
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
+  },
+  // applyMiddleware(contactsAPI.middleware),
+);
 
 export const persistor = persistStore(store);
+
+setupListeners(store.dispatch);

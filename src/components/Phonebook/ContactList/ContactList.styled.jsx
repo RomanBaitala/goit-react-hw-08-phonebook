@@ -1,20 +1,11 @@
 import styled from 'styled-components';
 
-export const List = styled.ul`
-  display: block;
-  list-style: none;
-  padding: 30px;
-  width: 30%;
-`;
+export const StyledContactList = styled.ul`
+  display: inline-block;
+  margin: ${p => p.theme.mp(3, 4, 0, 4)};
+  padding: 0;
 
-export const Item = styled.li`
-  display: flex;
-  margin: 10px;
-  line-height: 1;
-  align-items: baseline;
-  justify-content: space-between;
-`;
-export const Button = styled.button`
-  margin-left: 10px;
-  height: 50%;
+  min-width: 400px;
+  list-style: none;
+  border: 1px solid ${p => p.theme.colors.secondBackground};
 `;

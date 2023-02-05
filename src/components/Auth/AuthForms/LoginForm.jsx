@@ -1,39 +1,37 @@
 import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
+import { loginUser } from 'redux/operations';
+import { SectionCenter, StyledForm, StyledLabel, StyledInput, StyledButton } from 'components/Common';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
+  const handleFormSubmit = e => {
+    e.preventDefault();
 
     dispatch(
-      logIn({
-        email: evt.currentTarget.elements.email.value,
-        password: evt.currentTarget.elements.password.value,
+      loginUser({
+        email: e.currentTarget.elements.email.value,
+        password: e.currentTarget.elements.password.value,
       })
     );
 
-    evt.currentTarget.reset();
-
-    return (
-      <section>
-        <form onSubmit={handleSubmit} autoComplete="on">
-          <label>
-            Email:
-            <input type="email" name="email" autoComplete="email" />
-          </label>
-          <label>
-            Password:
-            <input
-              type="password"
-              name="pasword"
-              autoComplete="current-password"
-            />
-          </label>
-          <button type="submit">Login</button>
-        </form>
-      </section>
-    );
+    e.currentTarget.reset();
   };
+
+  return (
+    <SectionCenter>
+      <StyledForm onSubmit={handleFormSubmit} autoComplete="on">
+        <StyledLabel>
+          Email:
+          <StyledInput autoComplete="email" type="email" name="email" />
+        </StyledLabel>
+        <StyledLabel>
+          Password:
+          <StyledInput autoComplete="current-password" type="password" name="password" />
+        </StyledLabel>
+
+        <StyledButton type="submit">Login</StyledButton>
+      </StyledForm>
+    </SectionCenter>
+  );
 };

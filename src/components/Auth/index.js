@@ -1,3 +1,3 @@
 export * from './AuthForms';
-export * from './AuthorizeLinks';
-export * from './UserMenu';
+export * from './AuthorizeLinks/AuthorizeLinks';
+export * from './UserMenu/UserMenu';
